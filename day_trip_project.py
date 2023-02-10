@@ -27,27 +27,39 @@ def run_day_trip_generator():
     restaurant_list=['JimmyJohns','SteakHouse','Shiki','Hudsons Hamburgers','Sonic']
     entertainment=['Hiking','skiing','snowboarding','skydiving','paragliding']
     transportation=['car','plan','teleportaion','train','boat','bike']
+    names_of_options=['destination','restaurant','entertainment','transportation']
     list_of_options=[destination_list,restaurant_list,entertainment,transportation]
-    initial=print_out_day_trip(list_of_options)
+    initial=print_out_day_trip(list_of_options,names_of_options)
     user_input=input('do you like what you see? (yes or no) ')
     user_satisfaction=False
     while user_satisfaction==False:
         if user_input=='no':
             # print_out_day_trip(list_of_options)
+            to_change=input(f'what so you not like? (please select one of the following: {names_of_options})')
+            for item in names_of_options:
+                if item==to_change:
+                    index=names_of_options.index(item)
+                    for item in list_of_options:
+                        if list_of_options.index(item)==index:
+                            random_num=random.randrange(len(item))
+                            name=item[random_num]
+                            initial[index]=names_of_options[index]+': '+name
+
             for item in initial:
                 print(item)
             user_input=input('do you like what you see? (yes or no) ')
         elif user_input=='yes':
-            print(f'have a nice day your day trip:')
+            print( 'your day trip:')
             user_satisfaction=True
             for item in initial:
                 print(item)
+            print('Have a nice day')
            
        
 
 
-def print_out_day_trip(list_options):
-    names=['destination','restaurant','entertainment','transportation']
+def print_out_day_trip(list_options,names):
+    # names=['destination','restaurant','entertainment','transportation']
     index=0
     day_trip_list=[]
     for item in list_options:
@@ -56,7 +68,7 @@ def print_out_day_trip(list_options):
         #print(f'{names[index]}: {name}')
         day_trip_list.append(f'{names[index]}: {name}')
         index+=1
-    # for item in day_trip_list:
-    #     print(item)
+    for item in day_trip_list:
+        print(item)
     return day_trip_list
 run_day_trip_generator()
