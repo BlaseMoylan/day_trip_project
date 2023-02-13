@@ -52,16 +52,15 @@ def determine_satisfaction(current_trip):
 
 def re_select_option(current_trip,list_of_options,trip_options,user_satisfaction):
     while user_satisfaction==False:
-        # if user_input=='no':
-            to_change=input(f'what so you not like? (please select one of the following: {trip_options})')
-            for item in trip_options:
-                if item==to_change:
-                    index=trip_options.index(item)
-                    for item in list_of_options:
-                        if list_of_options.index(item)==index:
-                            name=random.choice(item)
-                            current_trip[index]=trip_options[index]+': '+name
-            user_satisfaction=determine_satisfaction(current_trip)
+        to_change=input(f'what so you not like? (please select one of the following: {trip_options})')
+        for item in trip_options:
+            if item==to_change:
+                index=trip_options.index(item)
+                for item in list_of_options:
+                    if list_of_options.index(item)==index:
+                        name=random.choice(item)
+                        current_trip[index]=trip_options[index]+': '+name
+        user_satisfaction=determine_satisfaction(current_trip)
 
 
 def print_out_day_trip(list_options,names):
