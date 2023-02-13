@@ -27,48 +27,53 @@ def run_day_trip_generator():
     restaurant_list=['JimmyJohns','SteakHouse','Shiki','Hudsons Hamburgers','Sonic']
     entertainment=['Hiking','skiing','snowboarding','skydiving','paragliding']
     transportation=['car','plan','teleportaion','train','boat','bike']
-    names_of_options=['destination','restaurant','entertainment','transportation']
+    trip_options=['destination','restaurant','entertainment','transportation']
     list_of_options=[destination_list,restaurant_list,entertainment,transportation]
-    initial=print_out_day_trip(list_of_options,names_of_options)
+    current_trip=print_out_day_trip(list_of_options,trip_options)
+    user_satisfaction=determine_satisfaction(current_trip)
+    re_select_option(current_trip,list_of_options,trip_options,user_satisfaction)
+
+
+def determine_satisfaction(current_trip):
+    for item in current_trip:
+            print(item)
     user_input=input('do you like what you see? (yes or no) ')
-    user_satisfaction=False
+    if user_input=='yes':
+        print( 'your day trip:')
+        for item in current_trip:
+            print(item)
+        print('Have a nice day')
+        return True 
+    elif user_input=='no':
+        return False
+    else:
+        print('please respond only with yes or no')
+
+
+def re_select_option(current_trip,list_of_options,trip_options,user_satisfaction):
     while user_satisfaction==False:
-        if user_input=='no':
-            # print_out_day_trip(list_of_options)
-            to_change=input(f'what so you not like? (please select one of the following: {names_of_options})')
-            for item in names_of_options:
+        # if user_input=='no':
+            to_change=input(f'what so you not like? (please select one of the following: {trip_options})')
+            for item in trip_options:
                 if item==to_change:
-                    index=names_of_options.index(item)
+                    index=trip_options.index(item)
                     for item in list_of_options:
                         if list_of_options.index(item)==index:
-                            random_num=random.randrange(len(item))
-                            name=item[random_num]
-                            initial[index]=names_of_options[index]+': '+name
-
-            for item in initial:
-                print(item)
-            user_input=input('do you like what you see? (yes or no) ')
-        elif user_input=='yes':
-            print( 'your day trip:')
-            user_satisfaction=True
-            for item in initial:
-                print(item)
-            print('Have a nice day')
-           
-       
+                            name=random.choice(item)
+                            current_trip[index]=trip_options[index]+': '+name
+            user_satisfaction=determine_satisfaction(current_trip)
 
 
 def print_out_day_trip(list_options,names):
-    # names=['destination','restaurant','entertainment','transportation']
     index=0
     day_trip_list=[]
     for item in list_options:
-        random_index=random.randrange(len(item))
-        name=item[random_index]      
-        #print(f'{names[index]}: {name}')
+        name=random.choice(item)      
         day_trip_list.append(f'{names[index]}: {name}')
         index+=1
     for item in day_trip_list:
         print(item)
     return day_trip_list
+
+
 run_day_trip_generator()
