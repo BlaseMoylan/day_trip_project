@@ -73,6 +73,6 @@ def print_out_day_trip(list_options,names):
     for item in day_trip_list:
         print(item)
     return day_trip_list
-
+    
 
 run_day_trip_generator()
