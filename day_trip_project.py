@@ -37,17 +37,18 @@ def run_day_trip_generator():
 def determine_satisfaction(current_trip):
     for item in current_trip:
             print(item)
-    user_input=input('do you like what you see? (yes or no) ')
-    if user_input=='yes':
-        print( 'your day trip:')
-        for item in current_trip:
-            print(item)
-        print('Have a nice day')
-        return True 
-    elif user_input=='no':
-        return False
-    else:
-        print('please respond only with yes or no')
+    while True:
+        user_input=input('do you like what you see? (yes or no) ')
+        if user_input=='yes':
+            print( 'your day trip:')
+            for item in current_trip:
+                print(item)
+            print('Have a nice day')
+            return True 
+        elif user_input=='no':
+            return False
+        else:
+            print('please respond only with yes or no')
 
 
 def re_select_option(current_trip,list_of_options,trip_options,user_satisfaction):
